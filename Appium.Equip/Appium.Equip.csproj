@@ -81,6 +81,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppiumDriverWait.cs" />
+    <Compile Include="ExpectedCondition.cs" />
     <Compile Include="Extensions\AppiumDriverExtension.cs" />
     <Compile Include="AppiumGlobalConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
