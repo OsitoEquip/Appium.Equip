@@ -15,6 +15,8 @@ var TestFile    = "Appium.Equip.Tests.dll";
 var TestDirectory ="./Appium.Equip/Appium.Equip.Tests/bin/debug";
 var TestDll      = TestDirectory + "/" + TestFile;
 var dirTestResults = "./TestResults";
+var dirNugetPackage ="./nuget";
+
 
 Task("Default")
     .IsDependentOn("Build");
@@ -52,6 +54,22 @@ Task("Clean")
     .Does(() =>
 {
     CleanDirectory(buildDir);
+});
+
+Task("Package")
+  .Does(()=>{
+    if (!DirectoryExists(dirNugetPackage))
+    {
+        CreateDirectory(dirNugetPackage);
+    }
+    var assemblyInfo = ParseAssemblyInfo("./Appium.Equip/Properties/AssemblyInfo.cs");
+    var nuGetPackSettings   = new NuGetPackSettings {                              
+                                Version                 = assemblyInfo.AssemblyFileVersion,
+                                Copyright               = "EQUIP 2016",
+                                // ReleaseNotes            = new [] {"Bug fixes", "Issue fixes", "Typos"},
+                                OutputDirectory         = "./nuget"
+                            };     
+    NuGetPack("./Appium.Equip/Appium.Equip.nuspec", nuGetPackSettings);
 });
 
 RunTarget(target);
