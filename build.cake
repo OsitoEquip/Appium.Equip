@@ -45,6 +45,7 @@ Task("Test")
     var testAssemblies = GetFiles(file);
     NUnit3(testAssemblies, new NUnit3Settings {
         //WorkingDirectory = "./Appium.Equip/Appium.Equip.Tests/bin/debug",
+        Results = "./TestResults/Appium.Equip.Tests.xml",
         StopOnError = false
     });
 });

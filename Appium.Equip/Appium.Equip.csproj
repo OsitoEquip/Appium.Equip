@@ -58,6 +58,9 @@
       <HintPath>..\packages\NuGet.Core.2.14.0\lib\net40-Client\NuGet.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.2.3\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Selenium.WebDriver.Equip, Version=0.4.130.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Selenium.WebDriver.Equip.0.4.130\lib\Selenium.WebDriver.Equip.dll</HintPath>
       <Private>True</Private>
@@ -86,6 +89,7 @@
     <Compile Include="Extensions\AppiumDriverExtension.cs" />
     <Compile Include="AppiumGlobalConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SauceLabs\SauceLabsProxy.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
