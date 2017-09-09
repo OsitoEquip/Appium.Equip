@@ -12,7 +12,7 @@ var buildNumber   = Argument("buildnumber", "0");
 var buildDir      = Directory("./artifacts");
 var solution      = "./Appium.Equip.sln";
 var TestFile    = "Appium.Equip.Tests.dll";
-var TestDirectory ="./Appium.Equip/Appium.Equip.Tests/bin/debug";
+var TestDirectory ="./Appium.Equip.Tests/bin/"+configuration;
 var TestDll      = TestDirectory + "/" + TestFile;
 var dirTestResults = "./TestResults";
 var dirNugetPackage ="./nuget";
@@ -36,16 +36,17 @@ Task("Build")
 Task("Test")
     .Does(() =>
 {
+    Information("test dir: " +dirTestResults);
+    Information("test dir: " +TestDirectory);
     if (!DirectoryExists(dirTestResults))
     {
         CreateDirectory(dirTestResults);
     }
-    Debug(TestDll);
-    var file ="C:/Users/Rick/Documents/GitHub/Appium.Equip/Appium.Equip.Tests/bin/Debug/Appium.Equip.Tests.dll";
+    var file = TestDirectory + "/Appium.Equip.Tests.dll";
     var testAssemblies = GetFiles(file);
-    NUnit3(testAssemblies, new NUnit3Settings {
-        //WorkingDirectory = "./Appium.Equip/Appium.Equip.Tests/bin/debug",
-        Results = "./TestResults/Appium.Equip.Tests.xml",
+    NUnit3(file, new NUnit3Settings {
+        WorkingDirectory = TestDirectory,
+        Results = dirTestResults + "/Appium.Equip.Tests.xml",
         StopOnError = false
     });
 });
