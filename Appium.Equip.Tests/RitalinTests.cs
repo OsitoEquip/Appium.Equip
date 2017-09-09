@@ -20,22 +20,32 @@ namespace Appium.Equip.Tests
         public void OneTimeSetUp()
         {
             //SauceLabsProxy.UploadAndriodPackage();
-            DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.SetCapability("appiumVersion", "1.6.4");
-            capabilities.SetCapability("deviceName", "Android Emulator");
-            capabilities.SetCapability("deviceOrientation", "portrait");
-           // capabilities.SetCapability("browserName", "");
-            capabilities.SetCapability("platformVersion", "6.0");
-            capabilities.SetCapability("platformName", "Android");
-            capabilities.SetCapability("app", "http://www.ositoproperties.com/Ritalin-Signed.apk");
-            capabilities.SetCapability("build", Assembly.GetAssembly(typeof(RitalinTests)).GetName().Version.ToString());
+            var caps = new DesiredCapabilities();
+            // capabilities.SetCapability("appiumVersion", "1.6.4");
+            // capabilities.SetCapability("deviceName", "Android Emulator");
+            // capabilities.SetCapability("deviceOrientation", "portrait");
+            //// capabilities.SetCapability("browserName", "");
+            // capabilities.SetCapability("platformVersion", "6.0");
+            // capabilities.SetCapability("platformName", "Android");
+            caps.SetCapability("appiumVersion", "1.5.3");
+            caps.SetCapability("deviceName", "Android Emulator");
+            caps.SetCapability("deviceOrientation", "portrait");
+            caps.SetCapability("browserName", "");
+            caps.SetCapability("platformVersion", "6.0");
+            caps.SetCapability("platformName", "Android");
+
+            //caps.SetCapability("app", @"C:\Users\Rick\Documents\GitHub\Appium.Equip\SampleApps\Ritalin\Ritalin\Ritalin.Android\bin\Debug\com.companyname.Ritalin-Signed.apk");
+            caps.SetCapability("app", "http://www.ositoproperties.com/Ritalin-Signed.apk");
+            caps.SetCapability("build", Assembly.GetAssembly(typeof(RitalinTests)).GetName().Version.ToString());
             // add these two enviorment variables and there values to use Sauce Labs
-            capabilities.SetCapability("username", SauceDriverKeys.SAUCELABS_USERNAME);
-            capabilities.SetCapability("accessKey", SauceDriverKeys.SAUCELABS_ACCESSKEY);
-            capabilities.SetCapability("name", "testName");
-            driver = new AndroidDriver<AppiumWebElement>(new Uri("https://us1.appium.testobject.com/wd/hub"), capabilities, new TimeSpan(0, 0, 60));
+            caps.SetCapability("username", SauceDriverKeys.SAUCELABS_USERNAME);
+            caps.SetCapability("accessKey", SauceDriverKeys.SAUCELABS_ACCESSKEY);
+            caps.SetCapability("name", TestContext.CurrentContext.Test.Name);
+            ///"http://SAUCE_USERNAME:SAUCE_ACCESS_KEY@ondemand.saucelabs.com:80/wd/hub"
+            driver = new AndroidDriver<AppiumWebElement>(new Uri($"http://{SauceDriverKeys.SAUCELABS_USERNAME}:{SauceDriverKeys.SAUCELABS_ACCESSKEY}@ondemand.saucelabs.com:80/wd/hub"), caps, new TimeSpan(0, 0, 300));
+            //driver = new AndroidDriver<AppiumWebElement>(new Uri("https://us1.appium.testobject.com/wd/hub"), capabilities, new TimeSpan(0, 0, 60));
             //capabilities.SetCapability("app", "Microsoft.WindowsCalculator_8wekyb3d8bbwe!App");
-            //driver = new WindowsDriver<AppiumWebElement>(new Uri("http://127.0.0.1:4723/"), capabilities, new TimeSpan(0, 0, 10));
+            //driver = new AndroidDriver<AppiumWebElement>(new Uri("http://127.0.0.1:4723/"), caps, new TimeSpan(0, 0, 10));
         }
 
         [OneTimeTearDown]
